@@ -87,7 +87,7 @@ function renderPokemon(char) {
   // adding the name to Dom
   pokeCard.append(pokeName);
   pokeCard.append(pokeLike);
-  pokeCard.append(porkLikeNum);
+  pokeCard.append(pokeLikeNum);
   pokeCard.append(likeBttn);
   pokeCard.append(delButton);
 
