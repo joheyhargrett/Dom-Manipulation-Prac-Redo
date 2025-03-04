@@ -19,8 +19,8 @@ const pokemons = [
   },
   {
     id: 4,
-    name: "charmander",
-    img: "https://pixy.org/download/1207107/",
+    name: "kirby",
+    img: "https://cdn.pixabay.com/photo/2021/12/26/17/31/pokemon-6895600_1280.png",
     likes: 20,
   },
   {
@@ -32,78 +32,215 @@ const pokemons = [
 ];
 
 
-// to get something by id we use #
-// to get something by class we use .
-const test2 = document.querySelector('div')
-// // const test = document.querySelectorAll('div')
+// Practicing using different Methods to Select Elements from the Dom
+const pokeForm = document.getElementById("poke-form");
+const pokeContainer = document.querySelector("#poke-container");
+const formLabels = document.getElementsByClassName(".form-label");
+const allDivs = document.querySelectorAll("div");
+const lectureGoals = document.querySelector("#lecture-goals").remove();
+// lectureGoals.remove("#lecture-goals");
 
-// // console.log(test)
-// // console.log(test2)
 
-const welcomeP = document.createElement('p')
-welcomeP.innerHTML = '<span class="hello"> hello world </span>'
+// I have an array of pokemon characters: pokemon
+// I need to generate a card for each character inside this array
 
-test2.appendChild(welcomeP)
+pokemons.forEach(character => renderPokemon(character));
 
-// test2.remove(welcomeP)
 
-// 1. Select the form element with id `poke-form` 
-// using the .getElementById() method and store in the variable `pokeForm`. 
 
-// must use .getElementById
-// for is called poke-form
-// assign to variable 'pokeForm'
 
-const pokeForm = document.getElementById('poke-form')
-console.log(pokeForm)
+// a function responsible for creating each character called renderPokemon()
+function renderPokemon(char) {
+  
+  // first create the card for the pokecard in a div
+  const pokeCard = document.createElement("div");
+  pokeCard.id = `poke-${char.id}`;
+  pokeCard.className = "poke-card";
+  
 
-// 2. Select the div element with id `poke-container` using the .querySelector() 
-// method and store in the variable `pokeContainer`.
+  // inside the pokeCard, need to create an img element
+  const pokeImg = document.createElement("img");
+  pokeImg.src = char.img;
+  pokeImg.alt = `${char.name}`;
+//
+  const pokeName = document.createElement("h3");
+  pokeName.textContent = `${char.name}`;
+  console.log(pokeName)
 
-const pokeContainer = document.querySelector('#poke-container')
-console.log(pokeContainer)
+  const pokeLike = document.createElement("h3");
+  pokeLike.textContent = `Likes: `;
 
-// 3. Select the label elements with class name `form-label` 
-// using the .getElementsByClassName() and store in the variable `labels`.
-const labels = document.getElementsByClassName('form-label')
-console.log(labels)
+  const pokeLikeNum = document.createElement("h3");
+  pokeLikeNum.textContent = `${char.likes}`;
 
-// 4. Select all the div elements 
-// using the .querySelectorAll() method and store in the variable `allDivs`.
-const allDivs = document.querySelectorAll('div')
-console.log(allDivs)
+  const likeBttn = document.createElement("button");
+  likeBttn.className = "like-bttn"
+  likeBttn.textContent = "♥";
 
-// 5. Select the div element with id `lecture-goals` and 
-// use the .remove() method to remove the element from the DOM.
+  const delButton = document.createElement("button");
+  delButton.className = "delete-bttn";
+  delButton.textContent = "Delete";
 
-const goals = document.getElementById('lecture-goals')
-goals.remove()
+  // adding the img to the Dom
+  pokeCard.append(pokeImg);
 
-// 6. Define a function `renderPokemon()` that will 
-// generate the HTML for each character card as seen in the image below:
+  // adding the name to Dom
+  pokeCard.append(pokeName);
+  pokeCard.append(pokeLike);
+  pokeCard.append(porkLikeNum);
+  pokeCard.append(likeBttn);
+  pokeCard.append(delButton);
 
-// <p align="center">
-//     <img src="./assets/wireframe.png" width="550" height="400">
-// </p>
+  // slap the pokeCard on the Dom
+pokeContainer.appendChild(pokeCard);
+
+}; 
+
+
+
+
+// OTHER WAYS I COULD HAVE IMPROVED THE CODE ABOVE
+
+// function renderPokemon(pokemon) {
+//   const pokeCard = document.createElement("div");
+//   pokeCard.id = `poke-${pokemon.id}`;
+//   pokeCard.className = "poke-card";
+
+//   pokeCard.innerHTML = `
+//     <img src="${pokemon.img}" alt="${pokemon.name}">
+//     <h3>${pokemon.name}</h3>
+//     <h3>Likes: <span class="like-count">${pokemon.likes}</span></h3>
+//     <button class="like-bttn">♥</button>
+//     <button class="delete-bttn">Delete</button>
+//   `;
+
+//   // Select elements for event handling
+//   const likeBttn = pokeCard.querySelector(".like-bttn");
+//   const likeCount = pokeCard.querySelector(".like-count");
+
+//   likeBttn.addEventListener("click", () => {
+//     pokemon.likes++;
+//     likeCount.textContent = pokemon.likes; // textContent is best here
+//   });
+
+//   pokeCard.querySelector(".delete-bttn").addEventListener("click", () => {
+//     pokeCard.remove();
+//   });
+
+//   pokeContainer.appendChild(pokeCard);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const renderPokemon = () => {
+//   const pokeDiv = document.querySelector('#poke-container')
+//   pokemons.forEach((poke) => {
+//     const pokeP = document.createElement('p')
+//     pokeP.setAttribute('align', 'center')
+//     pokeP.innerHTML = `<img src=${poke.img} width="550" height="400">`
+//     pokeDiv.appendChild(pokeP)
+//   })
+// }
+
+// renderPokemon()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// // to get something by id we use #
+// // to get something by class we use .
+// const test2 = document.querySelector('div')
+// // // const test = document.querySelectorAll('div')
+
+// // // console.log(test)
+// // // console.log(test2)
 
 // const welcomeP = document.createElement('p')
 // welcomeP.innerHTML = '<span class="hello"> hello world </span>'
 
 // test2.appendChild(welcomeP)
 
-const renderPokemon = () => {
-  const pokeDiv = document.querySelector('#poke-container')
-  pokemons.forEach((poke) => {
-    const pokeP = document.createElement('p')
-    pokeP.setAttribute('align', 'center')
-    pokeP.innerHTML = `<img src=${poke.img} width="550" height="400">`
-    pokeDiv.appendChild(pokeP)
-  })
-}
+// // test2.remove(welcomeP)
 
-renderPokemon()
+// // 1. Select the form element with id `poke-form` 
+// // using the .getElementById() method and store in the variable `pokeForm`. 
+
+// // must use .getElementById
+// // for is called poke-form
+// // assign to variable 'pokeForm'
+
+// const pokeForm = document.getElementById('poke-form')
+// console.log(pokeForm)
+
+// // 2. Select the div element with id `poke-container` using the .querySelector() 
+// // method and store in the variable `pokeContainer`.
+
+// const pokeContainer = document.querySelector('#poke-container')
+// console.log(pokeContainer)
+
+// // 3. Select the label elements with class name `form-label` 
+// // using the .getElementsByClassName() and store in the variable `labels`.
+// const labels = document.getElementsByClassName('form-label')
+// console.log(labels)
+
+// // 4. Select all the div elements 
+// // using the .querySelectorAll() method and store in the variable `allDivs`.
+// const allDivs = document.querySelectorAll('div')
+// console.log(allDivs)
+
+// // 5. Select the div element with id `lecture-goals` and 
+// // use the .remove() method to remove the element from the DOM.
+
+// const goals = document.getElementById('lecture-goals')
+// goals.remove()
+
+// // 6. Define a function `renderPokemon()` that will 
+// // generate the HTML for each character card as seen in the image below:
+
+// // <p align="center">
+// //     <img src="./assets/wireframe.png" width="550" height="400">
+// // </p>
+
+// // const welcomeP = document.createElement('p')
+// // welcomeP.innerHTML = '<span class="hello"> hello world </span>'
+
+// // test2.appendChild(welcomeP)
+
+// const renderPokemon = () => {
+//   const pokeDiv = document.querySelector('#poke-container')
+//   pokemons.forEach((poke) => {
+//     const pokeP = document.createElement('p')
+//     pokeP.setAttribute('align', 'center')
+//     pokeP.innerHTML = `<img src=${poke.img} width="550" height="400">`
+//     pokeDiv.appendChild(pokeP)
+//   })
+// }
+
+// renderPokemon()
 
 
-// const text= '<p>hello again</p>'
+// // const text= '<p>hello again</p>'
 
-// test2.appendChild(text)
+// // test2.appendChild(text)
